@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Place - Event Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Event Management System</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="user.html">User</a></li>
+                <li><a href="event.html">Event</a></li>
+                <li><a href="organisations.html">Organisations</a></li>
+                <li><a href="scheduled.html">Scheduled</a></li>
+                <li><a href="sponsor.html">Sponsor</a></li>
+                <li><a href="event-place.html">Event Place</a></li>
+                <li><a href="vendor.html">Vendor</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="booking.html">Booking</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Event Places</h2>
+            <p>All event place data will be dynamically fetched from the database.</p>
+        </section>
+
+        <section class="add-event-place">
+            <h3>Add a New Event Place</h3>
+            <form id="event-place-form">
+                <label for="place-name">Place Name:</label>
+                <input type="text" id="place-name" name="place-name" required>
+
+                <label for="place-location">Location:</label>
+                <input type="text" id="place-location" name="place-location" required>
+
+                <label for="place-capacity">Capacity:</label>
+                <input type="number" id="place-capacity" name="place-capacity" required>
+
+                <button type="submit">Add Event Place</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('event-place-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const placeName = document.getElementById('place-name').value;
+            const placeLocation = document.getElementById('place-location').value;
+            const placeCapacity = document.getElementById('place-capacity').value;
+
+            if (placeName && placeLocation && placeCapacity) {
+                // Assuming you're using fetch to send data to the backend
+                fetch('/add-event-place', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        placeName,
+                        placeLocation,
+                        placeCapacity,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Event place added successfully');
+                        document.getElementById('event-place-form').reset(); // Reset form fields
+                    } else {
+                        alert('Failed to add event place');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error adding event place');
+                });
+            } else {
+                alert('Please fill in all fields');
+            }
+        });
+    </script>
+</body>
+</html>
