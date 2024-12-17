@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Management</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <h1>Event Management System</h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="user.html">User</a></li>
+        <li><a href="event.html">Event</a></li>
+        <li><a href="organisations.html">Organisations</a></li>
+        <li><a href="scheduled.html">Scheduled</a></li>
+        <li><a href="sponsor.html">Sponsor</a></li>
+        <li><a href="event-place.html">Event Place</a></li>
+        <li><a href="vendor.html">Vendor</a></li>
+        <li><a href="payment.html">Payment</a></li>
+        <li><a href="booking.html">Booking</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section with Image -->
+  <div class="hero-section">
+    <img src="https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2024/06/how-to-start-an-event-planning-business-1.png" alt="Event Management Image" class="hero-image">
+    <h1>Plan Your Dream Event with <span>EventHub</span></h1>
+    <p>Your one-stop solution for all event needs.</p>
+    <a href="#events" class="cta-button">Explore Events</a>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Login Section -->
+    <section class="login-section">
+      <div class="login-form">
+        <h2>Login</h2>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        
+        <label for="role">Select Role</label>
+        <select id="role" name="role" required>
+          <option value="client">Client</option>
+          <option value="admin">Admin</option>
+        </select>
+        
+        <button type="button" id="login-btn">Login</button>
+        
+        <!-- Register Link for Clients -->
+        <p><a href="/register.html" id="register-link">Register as a Client</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2024 Event Management System. All Rights Reserved.</p>
+    <section class="contact-us">
+      <button class="dropdown-btn">Contact Us</button>
+      <div class="dropdown-content">
+        <p>Email: <a href="mailto:info@eventmanagement.com">info@eventmanagement.com</a></p>
+        <p>Phone: +123-456-7890</p>
+        <p>Address: 123 Event Street, Planning City, Country</p>
+      </div>
+    </section>
+  </footer>
+
+  <!-- Script Section -->
+  <script>
+    // Handle login form submission
+    document.getElementById('login-btn').addEventListener('click', () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const role = document.getElementById('role').value;
+
+        if (username && password) {
+            if (role === 'client') {
+                alert(`Welcome, ${username}! Redirecting to the Client Dashboard...`);
+                window.location.href = '/client-dashboard.html'; // Redirect to client dashboard
+            } else if (role === 'admin') {
+                alert(`Welcome Admin, ${username}! Redirecting to the Admin Panel...`);
+                window.location.href = '/admin-panel.html'; // Redirect to admin panel
+            }
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+
+    // Toggle dropdown contact details
+    document.querySelector('.dropdown-btn').addEventListener('click', () => {
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
