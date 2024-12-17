@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - Event Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <h1>Welcome to the Client Dashboard</h1>
+        </header>
+
+        <nav class="dashboard-nav">
+            <ul>
+                <li><button id="view-events-btn">View Events</button></li>
+                <li><button id="create-booking-btn">Create Booking</button></li>
+                <li><button id="view-profile-btn">View Profile</button></li>
+                <li><button id="logout-btn">Logout</button></li>
+            </ul>
+        </nav>
+
+        <div class="dashboard-content">
+            <div id="view-events" class="dashboard-section">
+                <h2>View Events</h2>
+                <p>Here you can view all available events.</p>
+                <!-- You can load events dynamically here, or display a list of events -->
+            </div>
+
+            <div id="create-booking" class="dashboard-section">
+                <h2>Create Booking</h2>
+                <p>Choose an event to create a booking.</p>
+                <!-- You can add a form to create bookings or display event details for booking -->
+            </div>
+
+            <div id="view-profile" class="dashboard-section">
+                <h2>Your Profile</h2>
+                <p>Here you can view and update your profile details.</p>
+                <!-- Display user profile details here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initially, hide all sections
+        document.getElementById('view-events').style.display = 'none';
+        document.getElementById('create-booking').style.display = 'none';
+        document.getElementById('view-profile').style.display = 'none';
+
+        // Event listeners for navigation buttons
+        document.getElementById('view-events-btn').addEventListener('click', function() {
+            // Show "View Events" section and hide others
+            showSection('view-events');
+        });
+
+        document.getElementById('create-booking-btn').addEventListener('click', function() {
+            // Show "Create Booking" section and hide others
+            showSection('create-booking');
+        });
+
+        document.getElementById('view-profile-btn').addEventListener('click', function() {
+            // Show "View Profile" section and hide others
+            showSection('view-profile');
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Redirect to login page (or logout functionality)
+            window.location.href = '/login.html';
+        });
+
+        // Function to show a specific section and hide the others
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+
+    <style>
+        /* Add some basic styles to make the dashboard look good */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-nav button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .dashboard-nav button:hover {
+            background-color: #0056b3;
+        }
+
+        .dashboard-content {
+            margin-top: 20px;
+        }
+
+        .dashboard-section {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-section h2 {
+            color: #007bff;
+        }
+    </style>
+</body>
+</html>
