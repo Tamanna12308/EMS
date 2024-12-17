@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Event Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-form">
+        <h2>Login</h2>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        
+        <label for="role">Select Role</label>
+        <select id="role" name="role" required>
+            <option value="client">Client</option>
+            <option value="admin">Admin</option>
+        </select>
+        
+        <button type="button" id="login-btn">Login</button>
+        
+        <!-- Register Link for Clients -->
+        <p><a href="/register" id="register-link">Register as a Client</a></p>
+    </div>
+    
+    <script>
+        // Handle login form submission
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            if (username && password) {
+                if (role === 'client') {
+                    // Simulate Client login
+                    alert(`Welcome, ${username}! Redirecting to the Client Dashboard...`);
+                    window.location.href = '/client-dashboard'; // Update with actual client dashboard URL
+                } else if (role === 'admin') {
+                    // Simulate Admin login
+                    alert(`Welcome Admin, ${username}! Redirecting to the Admin Panel...`);
+                    
+                    console.log('Redirecting to:', '/client_dashboard.html');
+window.location.href = '/client_dashboard.html';
+
+                }
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
