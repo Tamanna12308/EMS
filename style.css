@@ -1,6 +1,6 @@
 /* Global Color Variables */
 :root {
-    --primary-color: #87ceeb; /* Sky blue */
+    --primary-color: #007BFF; /* Sky blue */
     --text-color: #333; /* Dark text for readability */
     --link-color: white;
     --hover-color: #333; /* Dark hover effect */
@@ -200,7 +200,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #87ceeb; /* Sky blue */
+    background-color: #007BFF; /* Sky blue */
     padding: 15px 20px;
   }
   
@@ -331,7 +331,7 @@ button:hover {
 }
 
 .dropdown-btn {
-    background-color: #00bfff;
+    background-color: #007BFF;
     color: #000;
     padding: 0.8rem 1.2rem;
     font-size: 1rem;
@@ -366,7 +366,7 @@ button:hover {
 }
 
 .dropdown-content p a {
-    color: #00bfff;
+    color: #007BFF;
     text-decoration: none;
     transition: text-decoration 0.3s ease;
 }
@@ -397,4 +397,38 @@ button:hover {
     .login-form {
         width: 90%;
     }
+}
+/* Styling the footer and logout button */
+footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+.logout {
+  margin: 0;
+}
+
+.logout-button {
+  background-color: #007BFF; /* Red color */
+  color: white;
+  font-size: 16px;
+  padding: 15px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #007BFF; /* Darker red */
+  transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+.logout-button:focus {
+  outline: none;
+  box-shadow: 0 0 10px #007BFF(231, 76, 60, 0.8);
 }
