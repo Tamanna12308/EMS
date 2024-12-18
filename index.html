@@ -1,12 +1,203 @@
-<!DOCTYPE html>
+
+<!DOCTYPE html>  
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EventHub - Event Management System</title>
-  <link rel="stylesheet" href="index.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: #007bff;
+      color: #fff;
+      padding: 10px 0;
+    }
+
+    .header .logo h1 a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      padding: 5px 10px;
+    }
+
+    .nav-links a:hover {
+      color: #f0e68c;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      border-radius: 5px;
+      list-style: none;
+      min-width: 120px;
+      z-index: 1000;
+    }
+
+    .dropdown-menu li {
+      padding: 10px 20px;
+    }
+
+    .dropdown-menu li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .dropdown-menu li a:hover {
+      color: #007bff;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    section {
+      padding: 20px px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    section h2 {
+      margin-bottom: 5px;
+      font-size: 2.5rem;
+    }
+
+    .hero {
+      background: #FFFFFF;
+      padding: 100px 20px;
+    }
+
+    .about p,
+    .services p,
+    .contact p {
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+
+    .services .service-cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .services .card {
+      background: #fff;
+      border: 1px solid #5dca32;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      flex: 1;
+    }
+
+    .contact form {
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .contact form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .contact form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .contact form input,
+    .contact form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #5dca32;
+      border-radius: 5px;
+    }
+
+    .contact form button {
+      background: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact form button:hover {
+      background: #0056b3;
+    }
+
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+    
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-image: url('your-body-background.jpg'); /* Replace with your body background image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333;
+  }
+
+  .hero {
+    background-image: url('rJF69ifw/QWs0/SiXt5EAWPAXGIYAjsAVAynYzLHsOiE7ZYlt7MxlCuPbd3X5https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjzoj-T1IAgSRXdJdwDfmYanZ42QZbv2gVaw&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'); /* Replace with your hero background image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff; /* Make text white for better contrast */
+    padding: 100px 20px;
+    text-align: center;
+  }
+
+  .hero h1,
+  .hero p {
+    color: #070707; /* Ensure text in the hero section is white */
+  }
+
+</style>
+
+  </style>
 </head>
 
 <body>
@@ -14,7 +205,7 @@
   <header class="header">
     <div class="container">
       <div class="logo">
-        <h1><a href="index.html">EventHub</a></h1>
+        <h1><a href="index.html">Event Management System</a></h1>
       </div>
       <nav class="navbar">
         <ul class="nav-links">
@@ -23,22 +214,24 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="login.html" class="login-button">Login</a></li>
+          <li>
+            <a href="#" onclick="toggleDropdown()" id="language-button">Language</a>
+            <ul class="dropdown-menu" id="language-menu">
+              <li><a href="#" onclick="changeLanguage('en')">English</a></li>
+              <li><a href="#" onclick="changeLanguage('es')">Español</a></li>
+              <li><a href="#" onclick="changeLanguage('fr')">Français</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section id="home" class="hero">
     <div class="container">
-      <div class="hero-content">
-        <h1>Plan Your Perfect Event with <span>EventHub</span></h1>
-        <p>Your one-stop solution for all event management needs.</p>
-        <a href="#services" class="cta-button">Explore Services</a>
-      </div>
-      <div class="hero-image">
-        <img src="https://dt2sdf0db8zob.cloudfront.net/wp-content/uploads/2024/06/how-to-start-an-event-planning-business-1.png" alt="Event Management">
-      </div>
+      <h1>Welcome to EventHub</h1>
+      <p>Your one-stop solution for all event management needs.</p>
     </div>
   </section>
 
@@ -46,7 +239,7 @@
   <section id="about" class="about">
     <div class="container">
       <h2>About Us</h2>
-      <p>At EventHub, we specialize in creating unforgettable experiences. From corporate conferences to personal celebrations, our dedicated team ensures every event is flawlessly executed.</p>
+      <p>We specialize in creating unforgettable experiences. Whether it’s a corporate conference or a personal celebration, our dedicated team ensures every event is flawlessly executed.</p>
     </div>
   </section>
 
@@ -75,7 +268,7 @@
   <section id="contact" class="contact">
     <div class="container">
       <h2>Contact Us</h2>
-      <form action="#" class="contact-form">
+      <form id="contactForm" method="POST">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
@@ -88,7 +281,7 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" required></textarea>
         </div>
-        <button type="submit" class="submit-button">Send Message</button>
+        <button type="submit">Send Message</button>
       </form>
     </div>
   </section>
@@ -97,17 +290,113 @@
   <footer class="footer">
     <div class="container">
       <p>&copy; 2024 EventHub. All Rights Reserved.</p>
-      <ul class="social-links">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">LinkedIn</a></li>
-      </ul>
     </div>
   </footer>
 
   <!-- JavaScript -->
-  <script src="script.js"></script>
+
+  <script>
+    // Handle form submission using JavaScript
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent default form submission
+
+      // Get form data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      // Log data to console for debugging
+      console.log("Form data submitted:");
+      console.log("Name:", name);
+      console.log("Email:", email);
+      console.log("Message:", message);
+
+      // Send data to backend via Fetch API
+      fetch('/submit-message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message })
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok');
+      })
+      .then(data => {
+        // Handle success
+        alert('Your message has been sent!');
+        document.getElementById('contactForm').reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('There was an error sending your message.');
+      });
+    });
+
+  const translations = {
+    en: {
+      header: "Welcome to EventHub",
+      subheader: "Your one-stop solution for all event management needs.",
+      aboutTitle: "About Us",
+      aboutContent: "We specialize in creating unforgettable experiences. Whether it’s a corporate conference or a personal celebration, our dedicated team ensures every event is flawlessly executed.",
+      servicesTitle: "Our Services",
+      eventPlanning: "Comprehensive planning services to bring your vision to life.",
+      venueSelection: "Find the perfect venue for your event from our curated list.",
+      cateringVendors: "Top-notch catering and vendor partnerships for seamless service.",
+      contactTitle: "Contact Us",
+    },
+    es: {
+      header: "Bienvenido a EventHub",
+      subheader: "Su solución integral para todas las necesidades de gestión de eventos.",
+      aboutTitle: "Sobre Nosotros",
+      aboutContent: "Nos especializamos en crear experiencias inolvidables. Ya sea una conferencia corporativa o una celebración personal, nuestro equipo dedicado garantiza que cada evento se ejecute a la perfección.",
+      servicesTitle: "Nuestros Servicios",
+      eventPlanning: "Servicios de planificación integral para hacer realidad su visión.",
+      venueSelection: "Encuentra el lugar perfecto para tu evento de nuestra lista seleccionada.",
+      cateringVendors: "Servicios de catering y proveedores de primera categoría para un servicio sin problemas.",
+      contactTitle: "Contáctenos",
+    },
+    fr: {
+      header: "Bienvenue chez EventHub",
+      subheader: "Votre solution unique pour tous vos besoins en gestion d'événements.",
+      aboutTitle: "À Propos",
+      aboutContent: "Nous nous spécialisons dans la création d'expériences inoubliables. Qu'il s'agisse d'une conférence d'entreprise ou d'une célébration personnelle, notre équipe dévouée garantit que chaque événement est parfaitement exécuté.",
+      servicesTitle: "Nos Services",
+      eventPlanning: "Services de planification complets pour donner vie à votre vision.",
+      venueSelection: "Trouvez le lieu parfait pour votre événement parmi notre liste soigneusement sélectionnée.",
+      cateringVendors: "Des services de restauration et des partenariats fournisseurs de premier ordre pour un service sans faille.",
+      contactTitle: "Contactez-nous",
+    },
+    // Add more languages here
+  };
+
+  function changeLanguage(lang) {
+    const content = translations[lang];
+    if (content) {
+      document.querySelector(".hero h1").textContent = content.header;
+      document.querySelector(".hero p").textContent = content.subheader;
+      document.querySelector("#about h2").textContent = content.aboutTitle;
+      document.querySelector("#about p").textContent = content.aboutContent;
+      document.querySelector("#services h2").textContent = content.servicesTitle;
+      const serviceCards = document.querySelectorAll(".services .card");
+      serviceCards[0].querySelector("p").textContent = content.eventPlanning;
+      serviceCards[1].querySelector("p").textContent = content.venueSelection;
+      serviceCards[2].querySelector("p").textContent = content.cateringVendors;
+      document.querySelector("#contact h2").textContent = content.contactTitle;
+    } else {
+      alert("Translation not available for the selected language.");
+    }
+  }
+
+  function toggleDropdown() {
+    const menu = document.getElementById("language-menu");
+    menu.classList.toggle("show");
+  }
+  </script>
 </body>
+
 
 </html>
