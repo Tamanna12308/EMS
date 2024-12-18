@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - Event Management System</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.html">
 </head>
 <body>
     <div class="register-form">
@@ -30,7 +31,7 @@
 
             if (username && password && email) {
                 alert(`Registration successful! Welcome, ${username}.`);
-                window.location.href = '/client-dashboard'; // Redirect after successful registration
+                window.location.href = 'login.html'; // Redirect after successful registration
             } else {
                 alert('Please fill in all fields.');
             }
