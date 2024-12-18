@@ -3,42 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User - Event Management System</title>
+    <title>Manage Users - Event Management System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Admin Header -->
     <header class="header">
-        <h1>Event Management System</h1>
+        <h1>Manage Users</h1>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="user.html">User</a></li>
-                <li><a href="event.html">Event</a></li>
-                <li><a href="organisations.html">Organisations</a></li>
-                <li><a href="scheduled.html">Scheduled</a></li>
-                <li><a href="sponsor.html">Sponsor</a></li>
-                <li><a href="event-place.html">Event Place</a></li>
-                <li><a href="vendor.html">Vendor</a></li>
-                <li><a href="payment.html">Payment</a></li>
-                <li><a href="booking.html">Booking</a></li>
+                <li><a href="admin_panel.html">Dashboard</a></li>
+                <li><a href="event.html">Manage Events</a></li>
+                <li><a href="booking.html">Manage Bookings</a></li>
+                <li><a href="logout.html">Logout</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main Section -->
     <main>
-        <section>
-            <h2>User Login</h2>
-            <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" placeholder="Enter your username" required><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter your password" required><br>
-                <button type="submit">Login</button>
-                <p>Don't have an account? <a href="#">Register here</a>.</p>
-            </form>
+        <section class="user-management">
+            <h2>Users List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table">
+                    <!-- User data will be dynamically added here -->
+                </tbody>
+            </table>
         </section>
     </main>
 
-    
+    <script>
+        // Sample User Data (Replace with API call in a real system)
+        const users = [
+            { id: 1, username: "UserOne", email: "userone@example.com" },
+            { id: 2, username: "UserTwo", email: "usertwo@example.com" },
+            { id: 3, username: "UserThree", email: "userthree@example.com" }
+        ];
+
+        // Populate User Table
+        const userTable = document.getElementById('user-table');
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>
+                    <button onclick="editUser(${user.id})">Edit</button>
+                    <button onclick="deleteUser(${user.id})">Delete</button>
+                </td>
+            `;
+            userTable.appendChild(row);
+        });
+
+        // Edit User Function
+        function editUser(userId) {
+            alert(`Edit functionality for User ID: ${userId} not implemented yet.`);
+            // Add functionality to edit the user here
+        }
+
+        // Delete User Function
+        function deleteUser(userId) {
+            const confirmDelete = confirm(`Are you sure you want to delete User ID: ${userId}?`);
+            if (confirmDelete) {
+                alert(`User ID: ${userId} deleted successfully.`);
+                // Add functionality to delete the user from the database here
+            }
+        }
+    </script>
 </body>
 </html>
