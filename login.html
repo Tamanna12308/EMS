@@ -24,7 +24,7 @@
         <button type="button" id="login-btn">Login</button>
         
         <!-- Register Link for Clients -->
-        <p><a href="/register" id="register-link">Register as a Client</a></p>
+        <p><a href="registration.html" id="register-link">Register as a Client</a></p>
     </div>
     
     <script>
@@ -38,13 +38,13 @@
                 if (role === 'client') {
                     // Simulate Client login
                     alert(`Welcome, ${username}! Redirecting to the Client Dashboard...`);
-                    window.location.href = '/client-dashboard'; // Update with actual client dashboard URL
+                    window.location.href = 'client_dashboard.html'; // Update with actual client dashboard URL
                 } else if (role === 'admin') {
                     // Simulate Admin login
                     alert(`Welcome Admin, ${username}! Redirecting to the Admin Panel...`);
                     
-                    console.log('Redirecting to:', '/client_dashboard.html');
-window.location.href = '/client_dashboard.html';
+                    // console.log('Redirecting to:', 'client_dashboard.html');
+window.location.href = 'admin_panel.html';
 
                 }
             } else {
