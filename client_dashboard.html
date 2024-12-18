@@ -15,6 +15,7 @@
         <nav class="dashboard-nav">
             <ul>
                 <li><button id="view-events-btn">View Events</button></li>
+                <li><button id="view-schedule-btn">View schedule</button></li>
                 <li><button id="create-booking-btn">Create Booking</button></li>
                 <li><button id="view-profile-btn">View Profile</button></li>
                 <li><button id="logout-btn">Logout</button></li>
@@ -25,7 +26,11 @@
             <div id="view-events" class="dashboard-section">
                 <h2>View Events</h2>
                 <p>Here you can view all available events.</p>
-                <!-- You can load events dynamically here, or display a list of events -->
+            </div>
+
+            <div id="view-schedule" class="dashboard-section">
+                <h2>View Schedule</h2>
+                <p>Here you can view all events schedule.</p>
             </div>
 
             <div id="create-booking" class="dashboard-section">
@@ -45,6 +50,7 @@
     <script>
         // Initially, hide all sections
         document.getElementById('view-events').style.display = 'none';
+        document.getElementById('view-schedule').style.display = 'none';
         document.getElementById('create-booking').style.display = 'none';
         document.getElementById('view-profile').style.display = 'none';
 
@@ -53,7 +59,10 @@
             // Show "View Events" section and hide others
             showSection('view-events');
         });
-
+        document.getElementById('view-schedule-btn').addEventListener('click', function() {
+            // Show "View Schedule" section and hide others
+            showSection('view-schedule');
+        });
         document.getElementById('create-booking-btn').addEventListener('click', function() {
             // Show "Create Booking" section and hide others
             showSection('create-booking');
@@ -66,7 +75,7 @@
 
         document.getElementById('logout-btn').addEventListener('click', function() {
             // Redirect to login page (or logout functionality)
-            window.location.href = '/login.html';
+            window.location.href = 'login.html';
         });
 
         // Function to show a specific section and hide the others
