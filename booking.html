@@ -3,46 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking - Event Management System</title>
+    <title>Manage Bookings - Event Management System</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .modal input, .modal select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .modal .button {
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Admin Header -->
     <header class="header">
-        <h1>Event Management System</h1>
+        <h1>Manage Bookings</h1>
         <nav>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="user.html">User</a></li>
-                <li><a href="event.html">Event</a></li>
-                <li><a href="organisations.html">Organisations</a></li>
-                <li><a href="scheduled.html">Scheduled</a></li>
-                <li><a href="sponsor.html">Sponsor</a></li>
-                <li><a href="event-place.html">Event Place</a></li>
-                <li><a href="vendor.html">Vendor</a></li>
-                <li><a href="payment.html">Payment</a></li>
-                <li><a href="booking.html">Booking</a></li>
+                <li><a href="admin_panel.html">Dashboard</a></li>
+                <li><a href="event.html">Manage Events</a></li>
+                <li><a href="user.html">Manage Users</a></li>
+                <li><a href="logout.html">Logout</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main Section -->
     <main>
-        <section>
-            <h2>Booking</h2>
-            <form>
-                <label for="booking-name">Name:</label>
-                <input type="text" id="booking-name" placeholder="Enter your name" required><br>
-                <label for="booking-event">Event:</label>
-                <select id="booking-event" required>
-                    <option value="annual-conference">Annual Conference</option>
-                    <option value="music-fest">Music Fest</option>
-                </select><br>
-                <label for="booking-date">Date:</label>
-                <input type="date" id="booking-date" required><br>
-                <button type="submit">Confirm Booking</button>
-            </form>
+        <section class="booking-management">
+            <h2>Bookings List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Event Name</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="booking-table">
+                    <!-- Booking data will be dynamically added here -->
+                </tbody>
+            </table>
         </section>
     </main>
 
-    
+    <!-- Edit Booking Modal -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="edit-modal">
+        <h2>Edit Booking</h2>
+        <form id="edit-booking-form">
+            <input type="hidden" id="edit-booking-id">
+            <label for="edit-event">Event Name:</label>
+            <input type="text" id="edit-event" required>
+            <label for="edit-user">User:</label>
+            <input type="text" id="edit-user" required>
+            <label for="edit-date">Date:</label>
+            <input type="date" id="edit-date" required>
+            <label for="edit-status">Status:</label>
+            <select id="edit-status" required>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+            <button type="button" class="button" onclick="saveBooking()">Save Changes</button>
+            <button type="button" class="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        // Sample Booking Data (Replace with API call in a real system)
+        const bookings = [
+            { id: 101, event: "Music Fest", user: "UserOne", date: "2024-12-20", status: "Confirmed" },
+            { id: 102, event: "Tech Expo", user: "UserTwo", date: "2024-12-22", status: "Pending" },
+            { id: 103, event: "Wedding Gala", user: "UserThree", date: "2024-12-25", status: "Cancelled" }
+        ];
+
+        // Populate Booking Table
+        const bookingTable = document.getElementById('booking-table');
+        bookings.forEach(booking => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${booking.id}</td>
+                <td>${booking.event}</td>
+                <td>${booking.user}</td>
+                <td>${booking.date}</td>
+                <td>${booking.status}</td>
+                <td>
+                    <button onclick="editBooking(${booking.id})">Edit</button>
+                    <button onclick="deleteBooking(${booking.id})">Delete</button>
+                </td>
+            `;
+            bookingTable.appendChild(row);
+        });
+
+        // Open Edit Modal
+        function editBooking(bookingId) {
+            const booking = bookings.find(b => b.id === bookingId);
+            if (!booking) return alert("Booking not found!");
+
+            document.getElementById('edit-booking-id').value = booking.id;
+            document.getElementById('edit-event').value = booking.event;
+            document.getElementById('edit-user').value = booking.user;
+            document.getElementById('edit-date').value = booking.date;
+            document.getElementById('edit-status').value = booking.status;
+
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('edit-modal').style.display = 'block';
+        }
+
+        // Save Booking Changes
+        function saveBooking() {
+            const bookingId = parseInt(document.getElementById('edit-booking-id').value);
+            const booking = bookings.find(b => b.id === bookingId);
+            if (!booking) return alert("Error saving booking!");
+
+            booking.event = document.getElementById('edit-event').value;
+            booking.user = document.getElementById('edit-user').value;
+            booking.date = document.getElementById('edit-date').value;
+            booking.status = document.getElementById('edit-status').value;
+
+            alert("Booking updated successfully!");
+            closeModal();
+            updateTable();
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+
+        // Update Booking Table
+        function updateTable() {
+            bookingTable.innerHTML = '';
+            bookings.forEach(booking => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${booking.id}</td>
+                    <td>${booking.event}</td>
+                    <td>${booking.user}</td>
+                    <td>${booking.date}</td>
+                    <td>${booking.status}</td>
+                    <td>
+                        <button onclick="editBooking(${booking.id})">Edit</button>
+                        <button onclick="deleteBooking(${booking.id})">Delete</button>
+                    </td>
+                `;
+                bookingTable.appendChild(row);
+            });
+        }
+
+        // Delete Booking
+        function deleteBooking(bookingId) {
+            const confirmDelete = confirm(`Are you sure you want to delete Booking ID: ${bookingId}?`);
+            if (confirmDelete) {
+                const index = bookings.findIndex(b => b.id === bookingId);
+                if (index !== -1) bookings.splice(index, 1);
+                alert(`Booking ID: ${bookingId} deleted successfully.`);
+                updateTable();
+            }
+        }
+    </script>
 </body>
 </html>
